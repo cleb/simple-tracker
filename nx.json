@@ -33,6 +33,9 @@
     "simple-tracker-e2e": {
       "tags": [],
       "implicitDependencies": ["simple-tracker"]
+    },
+    "time-management": {
+      "tags": []
     }
   }
 }

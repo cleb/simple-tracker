@@ -9,7 +9,9 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/simple-tracker",
             "index": "apps/simple-tracker/src/index.html",
@@ -21,7 +23,10 @@
               "apps/simple-tracker/src/favicon.ico",
               "apps/simple-tracker/src/assets"
             ],
-            "styles": ["apps/simple-tracker/src/styles.scss"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "apps/simple-tracker/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -86,7 +91,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/simple-tracker"],
+          "outputs": [
+            "coverage/apps/simple-tracker"
+          ],
           "options": {
             "jestConfig": "apps/simple-tracker/jest.config.js",
             "passWithNoTests": true
@@ -114,9 +121,40 @@
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/simple-tracker-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/simple-tracker-e2e/**/*.{js,ts}"
+            ]
+          }
+        }
+      }
+    },
+    "time-management": {
+      "projectType": "library",
+      "root": "libs/time-management",
+      "sourceRoot": "libs/time-management/src",
+      "prefix": "simple-tracker",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/time-management"
+          ],
+          "options": {
+            "jestConfig": "libs/time-management/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/time-management/src/**/*.ts",
+              "libs/time-management/src/**/*.html"
+            ]
           }
         }
       }

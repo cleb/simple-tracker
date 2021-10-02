@@ -14,7 +14,9 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@simple-tracker/time-management": ["libs/time-management/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
