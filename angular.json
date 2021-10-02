@@ -1,0 +1,157 @@
+{
+  "version": 1,
+  "projects": {
+    "simple-tracker": {
+      "projectType": "application",
+      "root": "apps/simple-tracker",
+      "sourceRoot": "apps/simple-tracker/src",
+      "prefix": "simple-tracker",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/simple-tracker",
+            "index": "apps/simple-tracker/src/index.html",
+            "main": "apps/simple-tracker/src/main.ts",
+            "polyfills": "apps/simple-tracker/src/polyfills.ts",
+            "tsConfig": "apps/simple-tracker/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/simple-tracker/src/favicon.ico",
+              "apps/simple-tracker/src/assets"
+            ],
+            "styles": ["apps/simple-tracker/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/simple-tracker/src/environments/environment.ts",
+                  "with": "apps/simple-tracker/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "simple-tracker:build:production"
+            },
+            "development": {
+              "browserTarget": "simple-tracker:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "simple-tracker:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/simple-tracker/src/**/*.ts",
+              "apps/simple-tracker/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/simple-tracker"],
+          "options": {
+            "jestConfig": "apps/simple-tracker/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "simple-tracker-e2e": {
+      "root": "apps/simple-tracker-e2e",
+      "sourceRoot": "apps/simple-tracker-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/simple-tracker-e2e/cypress.json",
+            "devServerTarget": "simple-tracker:serve:development",
+            "tsConfig": "apps/simple-tracker-e2e/tsconfig.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "simple-tracker:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/simple-tracker-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular",
+    "packageManager": "npm"
+  },
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "defaultProject": "simple-tracker"
+}
